@@ -137,14 +137,24 @@ lokia/
 │   ├── models/
 │   ├── routes/
 │   ├── services/
+│   ├── dockerfile
 │   ├── go.mod/
 │   └── main.go
 ├── frontend/
-│   └── src/
-│       ├── components/
-│       ├── pages/
-│       ├── services/
-│       └── stores/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── stores/
+│   ├── dockerfile
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── node_module
+│   └── vite.config.js
 ├── docker-compose.yml
 ├── .env.example
 └── README.md
