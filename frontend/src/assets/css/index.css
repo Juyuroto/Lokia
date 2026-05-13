@@ -1,0 +1,70 @@
+:root {
+  /* ───── Palette ───── */
+  --color-50:  #F2F2F2;
+  --color-100: #DADADA;
+  --color-200: #C2C2C2;
+  --color-300: #AAAAAA;
+  --color-400: #919191;
+  --color-500: #797979;
+  --color-600: #616161;
+  --color-700: #494949;
+  --color-800: #303030;
+  --color-900: #181818;
+  --color-950: #000000;
+
+  /* ───── Backgrounds ───── */
+  --bg-app:     var(--color-900);
+  --bg-sidebar: var(--color-950);
+  --bg-surface: var(--color-800);
+  --bg-hover:   var(--color-700);
+  --bg-input:   var(--color-900);
+
+  /* ───── Textes ───── */
+  --text-primary:   var(--color-50);
+  --text-secondary: var(--color-300);
+  --text-muted:     var(--color-500);
+  --text-disabled:  var(--color-600);
+
+  /* ───── Bordures ───── */
+  --border:       var(--color-700);
+  --border-focus: var(--color-300);
+
+  /* ───── Interactivité ───── */
+  --interactive:          var(--color-200);
+  --interactive-hover:    var(--color-50);
+  --interactive-disabled: var(--color-600);
+
+  /* ───── Typographie ───── */
+  --font-sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+}
+
+/* ───── Reset ───── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { 
+    font-size: 16px; 
+    -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+}
+
+code, pre, kbd { font-family: var(--font-mono); }
+
+::selection { background: var(--color-600); color: var(--color-50); }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-900); }
+::-webkit-scrollbar-thumb { background: var(--color-600); border-radius: var(--radius-full); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-500); }
