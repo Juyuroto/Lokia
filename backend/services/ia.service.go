@@ -2,33 +2,48 @@ package services
 
 import (
 	"context"
-	"log"
 	"fmt"
 	
 	"github.com/ollama/ollama/api"
 )
 
-func LocalIA() {
+const model = "llama3.2-vision:11b"
+
+var IAClient *api.Client
+
+func LoadIA(){
 	client, err := api.ClientFromEnvironment()
-		if err != nil {
-			log.Fatal(err)
-		}
+	if err != nil {
+		panic(err)
+	}
+	IAClient = client
+
+	fmt.Println("IA chargée avec le modèle :", model)
+}
+
+func AskIA(prompt string, history []api.Message) (string, error){
+
+	if IAClient == nil {
+	    return "", fmt.Errorf("IA non initialisée")
+	}
 
 	ctx := context.Background()
 
-	req := &api.GenerateRequest{
-		Model:  "llama3.2-vision:11b",
-		Prompt: "Say hello to me",
-	}
-	
-	var response string
-	err = client.Generate(ctx, req, func(resp api.GenerateResponse) error {
-		response += resp.Response
-		return nil
+	history = append(history, api.Message{
+	    Role:    "user",
+	    Content: prompt,
 	})
-	if err != nil {
-		log.Fatal(err)
+
+	req := &api.ChatRequest{
+		Model:  model,
+		Messages: history,
 	}
 
-	fmt.Println(response)
+	var result string
+	err := IAClient.Chat(ctx, req, func(resp api.ChatResponse) error {
+		result += resp.Message.Content
+		return nil
+	})
+
+	return result, err
 }

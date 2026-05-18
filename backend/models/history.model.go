@@ -6,7 +6,7 @@ import (
 
 type History struct {
 	gorm.Model
-	Action		string		`json:"action"`
-	Name		string		`json:"name"`
-	Description	string		`json:"description"`
+	Conversation_id		uint		`json:"conversation_id" gorm:"index"`
+	Role				string		`json:"role"`
+	Content				string		`json:"content"`
 }

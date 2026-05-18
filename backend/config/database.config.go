@@ -29,6 +29,8 @@ func ConnectDatabase() {
 
     fmt.Println("Connexion à la base de données réussie !")
 
+    db.AutoMigrate(&models.Conversation{})
+    
     db.AutoMigrate(&models.History{})
 
     DB = db
