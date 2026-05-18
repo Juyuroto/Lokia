@@ -32,6 +32,9 @@ services:
       - PostgreDB=${PostgreDB}
       - PostgrePort=5432
       - PostgreHost=${PostgreHost}
+      - TAVILY_KEY_1
+      - TAVILY_KEY_2
+      - TAVILY_KEY_3
     depends_on:
       database:
         condition: service_healthy
@@ -39,6 +42,13 @@ services:
       - lokia_network
 
   ollama:
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
     image: ollama/ollama:latest
     container_name: lokia_IA
     ports:
