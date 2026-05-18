@@ -29,6 +29,11 @@ func AskIA(prompt string, history []api.Message) (string, error){
 
 	ctx := context.Background()
 
+	webResults := SearchWeb(prompt)
+    if webResults != "" {
+        prompt = fmt.Sprintf("%s\n\nInfos web disponibles:\n%s", prompt, webResults)
+    }
+
 	history = append(history, api.Message{
 	    Role:    "user",
 	    Content: prompt,
