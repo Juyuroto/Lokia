@@ -1,4 +1,4 @@
-name: Lokia CI (Go & React)
+name: Lokia CI/CD (Backend)
 
 on:
   push:
@@ -9,14 +9,31 @@ on:
 jobs:
   backend-validation:
     runs-on: ubuntu-latest
+    
+    env:
+      PostgreUser: ${{ vars.POSTGRES_USER }}
+      PostgreDB: ${{ vars.POSTGRES_DB }}
+      PostgrePort: ${{ vars.POSTGRES_PORT }}
+      BACKEND_PORT: ${{ vars.BACKEND_PORT }}
+      OllamaPort: ${{ vars.OLLAMA_PORT }}
+      
+      PostgrePassword: ${{ secrets.POSTGRES_PASSWORD }}
+      TAVILY_KEY_1: ${{ secrets.TAVILY_KEY_1 }}
+      TAVILY_KEY_2: ${{ secrets.TAVILY_KEY_2 }}
+      TAVILY_KEY_3: ${{ secrets.TAVILY_KEY_3 }}
+      
+      PostgreHost: "localhost"
+      PostgreSSLMODE: "disable"
+      OLLAMA_HOST: "http://localhost:11434"
+
     steps:
-      - name: Checkout du code
+      - name: Recorporer le code du dépôt
         uses: actions/checkout@v4
 
-      - name: Configuration de Go
+      - name: Configurer Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.24'
+          go-version: '1.25'
           cache-dependency-path: backend/go.sum
 
       - name: Installer les dépendances Go
@@ -24,20 +41,20 @@ jobs:
           cd backend
           go mod download
 
-      - name: Vérifier le formatage du code
+      - name: Vérifier le formatage du code (go fmt)
         run: |
           cd backend
           if [ -n "$(gofmt -l .)" ]; then
-            echo "Le code Go n'est pas bien formaté. Lance 'go fmt ./...' en local."
+            echo "Le code Go n'est pas bien formaté."
             exit 1
           fi
 
-      - name: Compiler le projet (main.go)
+      - name: Compiler le Backend
         run: |
           cd backend
           go build -v ./...
 
-      - name: Lancer les tests unitaires
+      - name: Lancer les tests unitaires Go
         run: |
           cd backend
           go test -v ./...
