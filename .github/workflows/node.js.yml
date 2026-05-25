@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      FRONTEND_PORT: ${{ vars.FRONTEND_PORT }}
-      FRONTEND_URL: ${{ vars.FRONTEND_URL }}
-      VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+      FRONTEND_PORT: ${{ secrets.FRONTEND_PORT }}
+      FRONTEND_URL: ${{ secrets.FRONTEND_URL }}
+      VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
 
     steps:
       - name: Recorporer le code du dépôt
