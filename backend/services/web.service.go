@@ -3,7 +3,7 @@ package services
 import (
 	"log"
 	"os"
-
+	
 	"github.com/diverged/tavily-go/models"
 	tavilygo "github.com/diverged/tavily-go"
 )
@@ -19,5 +19,16 @@ func SearchWeb(query string) string {
 		if key == "" {
 			continue
 		}
+		
+		client := tavilygo.NewClient(key)
+
+		searchReq := models.SearchRequest{
+        	Query:       query,
+        	SearchDepth: "basic",
+    	}
 	}
+	
+ 	log.Println("Toutes les clés Tavily sont épuisées")
+    return ""
+    
 }

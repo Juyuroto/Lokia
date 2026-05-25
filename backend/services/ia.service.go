@@ -16,5 +16,5 @@ func LoadIA(){
 }
 
 func AskIA(prompt string, history []api.Message) (string, error){
-
+	
 }
