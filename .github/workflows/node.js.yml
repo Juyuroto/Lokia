@@ -1,4 +1,4 @@
-name: Lokia CI (Go & React)
+name: Lokia CI/CD (frontend)
 
 on:
   push:
@@ -8,24 +8,31 @@ on:
 
 jobs:
   frontend-validation:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout du code
-          uses: actions/checkout@v4
-  
-        - name: Configuration de Node.js
-          uses: actions/setup-node@v4
-          with:
-            node-version: '25'
-            cache: 'npm'
-            cache-dependency-path: frontend/package-lock.json
-  
-        - name: Installer les dépendances Frontend
-          run: |
-            cd frontend
-            npm ci
-  
-        - name: Lancer le Build de l'interface React
-          run: |
-            cd frontend
-            npm run build
+    runs-on: ubuntu-latest
+    
+    env:
+      FRONTEND_PORT: ${{ vars.FRONTEND_PORT }}
+      FRONTEND_URL: ${{ vars.FRONTEND_URL }}
+      VITE_API_BASE_URL: ${{ vars.VITE_API_BASE_URL }}
+
+    steps:
+      - name: Recorporer le code du dépôt
+        uses: actions/checkout@v4
+
+      - name: Configurer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Installer les dépendances Frontend
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Compiler l'application React (Build)
+        run: |
+          cd frontend
+          npm run builda création, on ne publie rien pour le moment
+          tags: lokia-backend:test
