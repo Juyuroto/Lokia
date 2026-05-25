@@ -32,5 +32,4 @@ jobs:
       - name: Compiler l'application React (Build)
         run: |
           cd frontend
-          npm run builda création, on ne publie rien pour le moment
-          tags: lokia-backend:test
+          npm run build
