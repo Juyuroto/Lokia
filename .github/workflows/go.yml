@@ -1,0 +1,43 @@
+name: Lokia CI (Go & React)
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  backend-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du code
+        uses: actions/checkout@v4
+
+      - name: Configuration de Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+          cache-dependency-path: backend/go.sum
+
+      - name: Installer les dépendances Go
+        run: |
+          cd backend
+          go mod download
+
+      - name: Vérifier le formatage du code
+        run: |
+          cd backend
+          if [ -n "$(gofmt -l .)" ]; then
+            echo "Le code Go n'est pas bien formaté. Lance 'go fmt ./...' en local."
+            exit 1
+          fi
+
+      - name: Compiler le projet (main.go)
+        run: |
+          cd backend
+          go build -v ./...
+
+      - name: Lancer les tests unitaires
+        run: |
+          cd backend
+          go test -v ./...
