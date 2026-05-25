@@ -11,20 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      PostgreUser: ${{ vars.POSTGRES_USER }}
-      PostgreDB: ${{ vars.POSTGRES_DB }}
-      PostgrePort: ${{ vars.POSTGRES_PORT }}
-      BACKEND_PORT: ${{ vars.BACKEND_PORT }}
-      OllamaPort: ${{ vars.OLLAMA_PORT }}
+      PostgreUser: ${{ secrets.POSTGREUSER }}
+      PostgrePassword: ${{ secrets.POSTGREPASSWORD }}
+      PostgreDB: ${{ secrets.POSTGREDB }}
+      PostgrePort: ${{ secrets.POSTGREPORT }}
+      PostgreHost: ${{ secrets.POSTGREHOST }}
+      PostgreSSLMODE: ${{ secrets.POSTGRESSLMODE }}
       
-      PostgrePassword: ${{ secrets.POSTGRES_PASSWORD }}
+      BACKEND_PORT: ${{ secrets.BACKEND_PORT }}
+      OllamaPort: ${{ secrets.OLLAMAPORT }} 
+      OLLAMA_HOST: ${{ secrets.OLLAMA_HOST }}
+      
       TAVILY_KEY_1: ${{ secrets.TAVILY_KEY_1 }}
       TAVILY_KEY_2: ${{ secrets.TAVILY_KEY_2 }}
       TAVILY_KEY_3: ${{ secrets.TAVILY_KEY_3 }}
-      
-      PostgreHost: "localhost"
-      PostgreSSLMODE: "disable"
-      OLLAMA_HOST: "http://localhost:11434"
 
     steps:
       - name: Recorporer le code du dépôt
