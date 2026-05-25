@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Configurer Docker Buildx
-        uses: actions/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@v3
 
       - name: Tester la construction de l'image Docker du Backend
         uses: docker/build-push-action@v5
@@ -23,3 +23,11 @@ jobs:
           file: ./backend/dockerfile
           push: false 
           tags: lokia-backend:test
+
+      - name: Tester la construction de l'image Docker du Frontend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          file: ./frontend/dockerfile
+          push: false 
+          tags: lokia-frontend:test
