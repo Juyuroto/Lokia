@@ -1,6 +1,5 @@
-name: Lokia CI (Docker)
+name: Lokia CI/CD (Docker)
 
-# Déclencheurs : s'exécute à chaque push ou PR sur la branche principale
 on:
   push:
     branches: [ main, master ]
@@ -9,12 +8,18 @@ on:
 
 jobs:
   docker-check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
     steps:
-      - name: Checkout du code
+      - name: Recorporer le code du dépôt
         uses: actions/checkout@v4
 
-      - name: Vérifier la construction de l'image Docker Backend
-        run: |
-          cd backend
-          docker build -t lokia-backend:test .
+      - name: Configurer Docker Buildx
+        uses: actions/setup-buildx-action@v3
+
+      - name: Tester la construction de l'image Docker du Backend
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          file: ./backend/dockerfile
+          push: false 
+          tags: lokia-backend:test
