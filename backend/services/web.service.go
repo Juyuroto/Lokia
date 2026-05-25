@@ -19,28 +19,5 @@ func SearchWeb(query string) string {
 		if key == "" {
 			continue
 		}
-
-		client := tavilygo.NewClient(key)
-
-		searchReq := models.SearchRequest{
-           	Query:       query,
-           	SearchDepth: "basic",
-       	}
-
-        response, err := tavilygo.Search(client, searchReq)
-        if err != nil{
-        	log.Printf("Clé épuisée ou erreur, tentative avec la suivante: %v", err)
-         	continue
-        }
-
-        var content string
-        for _, result := range response.Results {
-            content += result.Content + "\n"
-        }
-        return content
-
 	}
-
- 	log.Println("Toutes les clés Tavily sont épuisées")
-    return ""
 }
