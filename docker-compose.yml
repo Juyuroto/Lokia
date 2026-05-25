@@ -25,16 +25,16 @@ services:
     container_name: lokia_backend
     restart: always
     ports:
-      - "${BACKEND_PORT}:5005"
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
     environment:
       - PostgreUser=${PostgreUser}
       - PostgrePassword=${PostgrePassword}
       - PostgreDB=${PostgreDB}
       - PostgrePort=5432
       - PostgreHost=${PostgreHost}
-      - TAVILY_KEY_1
-      - TAVILY_KEY_2
-      - TAVILY_KEY_3
+      - TAVILY_KEY_1=${TAVILY_KEY_1}
+      - TAVILY_KEY_2=${TAVILY_KEY_2}
+      - TAVILY_KEY_3=${TAVILY_KEY_3}
     depends_on:
       database:
         condition: service_healthy
@@ -67,7 +67,7 @@ services:
     container_name: lokia_frontend
     restart: unless-stopped
     ports:
-      - "${FRONTEND_PORT}:5000"
+      - "${FRONTEND_PORT}:${FRONTEND_PORT}"
     volumes:
       - ./frontend:/app:Z
       - /app/node_modules
