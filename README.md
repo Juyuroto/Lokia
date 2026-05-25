@@ -69,13 +69,7 @@ git clone https://github.com/Juyuroto/lokia.git
 cd lokia
 ```
 
-### 2. Télécharge le modèle IA
-
-```bash
-ollama pull llama3.2-vision:11b
-```
-
-### 3. Configure les variables d'environnement
+### 2. Configure les variables d'environnement
 
 ```bash
 cp .env.example .env
@@ -101,13 +95,18 @@ OPENWEATHER_API_KEY=ta_cle
 NEWS_API_KEY=ta_cle
 ```
 
-### 4. Lance avec Docker
+### 3. Lance avec Docker
 
 ```bash
 docker-compose up -d
 ```
 
-### 4b. Ou lance manuellement (Pas recommandé)
+### 3b. Ou lance manuellement (Pas recommandé)
+
+**Ollama**
+```bash
+ollama pull llama3.2-vision:11b
+```
 
 **Backend :**
 ```bash
@@ -123,7 +122,7 @@ npm install
 npm run dev
 ```
 
-L'interface est accessible sur **http://localhost:5173**
+L'interface est accessible sur **http://localhost:3000**
 
 ---
 
@@ -132,7 +131,7 @@ L'interface est accessible sur **http://localhost:5173**
 ```
 lokia/
 ├── backend/
-│   ├── handlers/
+│   ├── controllers
 │   ├── middlewares/
 │   ├── models/
 │   ├── routes/
@@ -146,8 +145,7 @@ lokia/
 │   │   ├── assets/
 │   │   ├── components/
 │   │   ├── pages/
-│   │   ├── services/
-│   │   └── stores/
+│   │   └── services/
 │   ├── dockerfile
 │   ├── eslint.config.js
 │   ├── index.html
